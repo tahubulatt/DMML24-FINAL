@@ -141,6 +141,7 @@
 // }
 
 // src/pages/index.js
+// src/pages/index.js
 import { useState } from 'react';
 import axios from 'axios';
 import styles from '../styles/Home.module.css';
@@ -201,6 +202,7 @@ export default function Home() {
 
     return (
         <div className={styles.container}>
+            <img src="/header.jpg" alt="Image Description" className={styles.headerImage} />
             <h1 className={styles.title}>Predict Student Performance</h1>
             <div className={styles.card}>
                 <form onSubmit={handleSubmit}>

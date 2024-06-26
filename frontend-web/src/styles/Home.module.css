@@ -78,37 +78,53 @@
 }
 
 /* src/styles/Home.module.css */
+/* src/styles/Home.module.css */
+
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0 2rem;
+    background: linear-gradient(135deg, #bfe6ff, #76c7ff); /* Blue gradient */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto; /* Center align */
+    text-align: center;
+    margin-top: 2rem;
 }
+
+.headerImage {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.error {
+    border-color: red;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.9rem;
+}
+
+/* src/styles/Home.module.css */
 
 .title {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
 
-.card {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 500px;
-    text-align: left;
-}
-
 .inputGroup {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.0rem;
 }
 
 .inputGroup label {
     display: block;
     margin-bottom: 0.5rem;
+    text-align: left;
 }
 
 .inputGroup input, .inputGroup select {
