@@ -45,7 +45,7 @@ export default function Home() {
         console.log('Sending features:', features);
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/predict', { features });
+            const response = await axios.post('http://127.0.0.1:5000/api/predict', { features });
             const score = response.data.prediction;
             const category = categorizePrediction(score);
             console.log('Received response:', response.data);

@@ -9,7 +9,7 @@ CORS(app, origins=['http://localhost:3000'])
 # Load the model
 model = joblib.load('spa_model.pkl')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/api/predict', methods=['POST'])
 def predict():
     data = request.json
     features = np.array([data['features']])
