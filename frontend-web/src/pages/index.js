@@ -12,44 +12,42 @@ export default function Home() {
     const [prediction, setPrediction] = useState(null);
 
     const categorizePrediction = (score) => {
-      if (score >= 0 && score <= 30) {
-          return 'Perlu Banyak Latihan !';
-      } else if (score >= 31 && score <= 60) {
-          return 'Cukup Baik !';
-      } else if (score >= 61 && score <= 80) {
-          return 'Hebat !';
-      } else if (score >= 81 && score <= 100) {
-          return 'Luar Biasa !';
-      } else {
-          return 'Invalid Score';
-      }
-  };
+        if (score >= 0 && score <= 30) {
+            return 'Perlu Banyak Latihan !';
+        } else if (score >= 31 && score <= 60) {
+            return 'Cukup Baik !';
+        } else if (score >= 61 && score <= 80) {
+            return 'Hebat !';
+        } else if (score >= 81) {
+            return 'Luar Biasa !';
+        } else {
+            return 'Invalid Score';
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Konversi inputan menjadi fitur boolean untuk model
-        const features = [
-            gender === 'male' ? 1 : 0, // Gender (binary)
-            education === 'sd' ? 1 : 0, // SD (binary)
-            education === 'smp' ? 1 : 0, // SMP (binary)
-            education === 'sma' ? 1 : 0, // SMA (binary)
-            education === 's1' ? 1 : 0, // S1 (binary)
-            education === 's2' ? 1 : 0, // S2 (binary)
-            // education === 's3' ? 1 : 0, // S3 (binary)
-            lunch === 'ya' ? 1 : 0, // Lunch (binary)
-            parseInt(readingScore), // Reading Score (integer)
-            parseInt(writingScore) // Writing Score (integer)
-        ];
+        // Konversi inputan menjadi fitur boolean dan numerik untuk model
+        const data = {
+            gender: gender === 'male' ? 1 : 0, // Gender (binary)
+            "reading score": parseInt(readingScore), // Reading Score (integer)
+            "writing score": parseInt(writingScore), // Writing Score (integer)
+            "associate's degree": education === 'd3' ? 1 : 0, // Associate's degree (binary)
+            "bachelor's degree": education === 's1' ? 1 : 0, // Bachelor's degree (binary)
+            "high school": education === 'sma' ? 1 : 0, // High School (binary)
+            "master's degree": education === 's2' ? 1 : 0, // Master's degree (binary)
+            "standard": lunch === 'ya' ? 1 : 0, // Standard lunch (binary)
+            "free/reduced": lunch === 'tidak' ? 1 : 0 // Lunch free/reduced (binary)
+        };
 
-        console.log('Sending features:', features);
+        console.log('Sending data:', data);
 
         try {
-            const response = await axios.post('http://127.0.0.1:5000/api/predict', { features });
+            const response = await axios.post('http://127.0.0.1:5000/api/predict', data);
             const score = response.data.prediction;
             const category = categorizePrediction(score);
             console.log('Received response:', response.data);
-            // setPrediction(response.data.prediction);
             setPrediction({ name, value: score, category });
         } catch (error) {
             console.error('Error making prediction:', error);
@@ -78,12 +76,10 @@ export default function Home() {
                         <label>Parental Education</label>
                         <select value={education} onChange={(e) => setEducation(e.target.value)} required>
                             <option value="">Select Education</option>
-                            <option value="sd">SD</option>
-                            <option value="smp">SMP</option>
                             <option value="sma">SMA</option>
+                            <option value="d3">D3</option>
                             <option value="s1">S1</option>
                             <option value="s2">S2</option>
-                            {/* <option value="s3">S3</option> */}
                         </select>
                     </div>
                     <div className={styles.inputGroup}>

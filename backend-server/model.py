@@ -27,27 +27,18 @@ y = df['math score']
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
+# Save the scaler
+joblib.dump(scaler, 'scaler.pkl')
+
 # Split Data
 X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
-
-# Create DataFrame for X_train and X_test
-X_train_df = pd.DataFrame(X_train, columns=X.columns)
-X_test_df = pd.DataFrame(X_test, columns=X.columns)
-
-# Apply scaling to 'reading score' and 'writing score' only
-scaler = StandardScaler()
-X_train_scaled_scores = scaler.fit_transform(X_train_df[['reading score', 'writing score']])
-X_test_scaled_scores = scaler.transform(X_test_df[['reading score', 'writing score']])
-
-# Concatenate scaled scores with the rest of the features
-X_train_scaled = pd.concat([pd.DataFrame(X_train_scaled_scores, columns=['reading score', 'writing score']), X_train_df.reset_index(drop=True).drop(['reading score', 'writing score'], axis=1)], axis=1)
-X_test_scaled = pd.concat([pd.DataFrame(X_test_scaled_scores, columns=['reading score', 'writing score']), X_test_df.reset_index(drop=True).drop(['reading score', 'writing score'], axis=1)], axis=1)
 
 # Model
 regr = LinearRegression()
 
 # Train Model
-regr.fit(X_train_scaled, y_train)
+regr.fit(X_train, y_train)
 
 # Save the model
 joblib.dump(regr, 'spa_model.pkl')
+
