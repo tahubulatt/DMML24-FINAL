@@ -6,7 +6,23 @@
 - Muhammad Aditya Permana H071221063
 - Ahmad Fauzhan Ramadhan B H071221062
 
-Kanban Board https://trello.com/invite/b/d1ANtd14/ATTIf7fe33a93825322b77df77dbded12cdb0F3AC715/my-trello-board
+## Documentation
+## Application Structure
+- `frontend-web` Folder:
+  Contains the code for the Student Academic Performance Prediction website UI.
+- `backend-server`Folder :
+  Contains the server-side code for processing data sent from the frontend.
+
+## Technologies Used
+- **Frontend** :
+  - **Next.js** : React framework
+  - **React** : JavaScript library 
+- **Backend** :
+   - **Flask** : Web framework for Python with RESTful API
+   - **scikit-learn** : For building and saving machine learning models
+   - **joblib** : For saving and loading machine learning models and encoders
+   - **Pandas** : For processing data in DataFrame format
+   - **Flask-CORS** : Allows Cross-Origin Resource Sharing (CORS)
 
 ## How to Run the Application
 ### Running the Backend Server
@@ -36,3 +52,6 @@ python app.py
 npm run dev
 ```
 Open your web browser and go to http://localhost:3000. Enjoy !
+
+## **Dataset**
+🔗[EDA-Student Performance prediction](https://www.kaggle.com/code/sonialikhan/eda-student-performance-prediction/notebook)

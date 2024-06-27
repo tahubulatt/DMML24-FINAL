@@ -10,6 +10,9 @@ export default function Home() {
     const [readingScore, setReadingScore] = useState('');
     const [writingScore, setWritingScore] = useState('');
     const [prediction, setPrediction] = useState(null);
+    const [nameError, setNameError] = useState('');
+    const [readingScoreError, setReadingScoreError] = useState('');
+    const [writingScoreError, setWritingScoreError] = useState('');
 
     const categorizePrediction = (score) => {
         if (score >= 0 && score <= 30) {
@@ -54,6 +57,42 @@ export default function Home() {
         }
     };
 
+    const handleNameChange = (e) => {
+        const value = e.target.value;
+        if (/[^a-zA-Z\s]/.test(value)) {
+            setNameError('Name can only contain letters');
+        } else {
+            setNameError('');
+        }
+        setName(value);
+        setGender('');
+        setEducation('');
+        setLunch('');
+        setReadingScore('');
+        setWritingScore('');
+        setPrediction(null);
+    };
+
+    const handleReadingScoreChange = (e) => {
+        const value = e.target.value;
+        if (value > 100) {
+            setReadingScoreError('Reading score cannot exceed 100');
+        } else {
+            setReadingScoreError('');
+        }
+        setReadingScore(value);
+    };
+
+    const handleWritingScoreChange = (e) => {
+        const value = e.target.value;
+        if (value > 100) {
+            setWritingScoreError('Writing score cannot exceed 100');
+        } else {
+            setWritingScoreError('');
+        }
+        setWritingScore(value);
+    };
+
     return (
         <div className={styles.container}>
             <img src="/header.jpg" alt="Image Description" className={styles.headerImage} />
@@ -62,7 +101,13 @@ export default function Home() {
                 <form onSubmit={handleSubmit}>
                     <div className={styles.inputGroup}>
                         <label>Name</label>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={handleNameChange}
+                            required
+                        />
+                        {nameError && <p className={styles.error}>{nameError}</p>}
                     </div>
                     <div className={styles.inputGroup}>
                         <label>Gender</label>
@@ -80,6 +125,7 @@ export default function Home() {
                             <option value="d3">D3</option>
                             <option value="s1">S1</option>
                             <option value="s2">S2</option>
+                            {/* <option value="s3">S3</option> */}
                         </select>
                     </div>
                     <div className={styles.inputGroup}>
@@ -92,13 +138,27 @@ export default function Home() {
                     </div>
                     <div className={styles.inputGroup}>
                         <label>Reading Score</label>
-                        <input type="number" value={readingScore} onChange={(e) => setReadingScore(e.target.value)} required />
+                        <input
+                            type="number"
+                            value={readingScore}
+                            onChange={handleReadingScoreChange}
+                            max="100"
+                            required
+                        />
+                        {readingScoreError && <p className={styles.error} style={{ textAlign: 'left' }}>{readingScoreError}</p>}
                     </div>
                     <div className={styles.inputGroup}>
                         <label>Writing Score</label>
-                        <input type="number" value={writingScore} onChange={(e) => setWritingScore(e.target.value)} required />
+                        <input
+                            type="number"
+                            value={writingScore}
+                            onChange={handleWritingScoreChange}
+                            max="100"
+                            required
+                        />
+                        {writingScoreError && <p className={styles.error} style={{ textAlign: 'left' }}>{writingScoreError}</p>}
                     </div>
-                    <button type="submit" className={styles.button}>Predict</button>
+                    <button type="submit" className={styles.button} disabled={nameError || readingScoreError || writingScoreError}>Predict</button>
                 </form>
                 {prediction !== null && (
                     <div className={styles.result}>

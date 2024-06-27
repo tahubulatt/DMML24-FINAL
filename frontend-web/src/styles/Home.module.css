@@ -80,6 +80,8 @@
 /* src/styles/Home.module.css */
 /* src/styles/Home.module.css */
 
+/* src/styles/Home.module.css */
+
 .container {
     background: linear-gradient(135deg, #bfe6ff, #76c7ff); /* Blue gradient */
     padding: 30px;
@@ -93,6 +95,7 @@
     margin-top: 2rem;
 }
 
+
 .headerImage {
     display: block;
     margin: 0 auto 20px;
@@ -101,9 +104,13 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* src/styles/Home.module.css */
 .error {
-    border-color: red;
+    color: red;
+    text-align: left;
+    margin-top: 5px;
 }
+
 
 .errorMessage {
     color: red;
